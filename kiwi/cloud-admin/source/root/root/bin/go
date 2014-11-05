@@ -3,6 +3,10 @@
 export PATH="$PATH:/sbin:/usr/sbin/"
 
 cd /var/lib/firstboot
+# atftp required at build-time for oemboot/suse-SLES11 bug
+# but conflicts with tftp crowbar wants
+zypper -n rm atftp
+
 
 ./install-suse-cloud.sh
 ./setup-node-sh-vars.sh
