@@ -1,0 +1,3 @@
+#!/bin/bash
+
+crowbar batch build /root/simple-cloud.yaml
