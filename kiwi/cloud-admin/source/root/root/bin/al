@@ -1,0 +1,11 @@
+#!/bin/bash
+
+nodes=( $( knife node list ) )
+aliases=(
+    admin # DUMMY, only used for alignment
+    controller1
+    compute{1..5}
+)
+for (( i=1; i < ${#nodes[@]}; i++ )); do
+    crowbar machines rename ${nodes[$i]} ${aliases[$i]}
+done
