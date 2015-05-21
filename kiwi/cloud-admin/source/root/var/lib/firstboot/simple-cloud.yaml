@@ -43,22 +43,13 @@ proposals:
       glance-server:
         - "@@controller1@@"
 - barclamp: cinder
-  wipe_attributes:
-    - volumes
-  attributes:
-    volumes:
-      - backend_name: local
-        backend_driver: local
-        local:
-          file_size: 2000
-          volume_name: cinder-volumes
-          file_name: /var/lib/cinder/volume.raw
   deployment:
     elements:
       cinder-controller:
         - "@@controller1@@"
       cinder-volume:
         - "@@compute1@@"
+        - "@@compute2@@"
 - barclamp: neutron
   deployment:
     elements:
@@ -76,6 +67,10 @@ proposals:
         - "@@controller1@@"
       nova-multi-compute-kvm:
         - "@@compute1@@"
+        - "@@compute2@@"
+        - "@@compute3@@"
+        - "@@compute4@@"
+        - "@@compute5@@"
 - barclamp: nova_dashboard
   deployment:
     elements:
