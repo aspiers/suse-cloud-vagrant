@@ -7,10 +7,22 @@ proposals:
 - barclamp: provisioner
   attributes:
     shell_prompt: USER@ALIAS:CWD SUFFIX
+- barclamp: dns
+  attributes:
+    forwarders:
+      - 192.168.100.4
+  deployment:
+    elements:
+      dns-server:
+        - "@@admin@@"
+        - "@@controller1@@"
+- barclamp: ntp
+  deployment:
+    elements:
+      ntp-server:
+        - "@@admin@@"
+        - "@@controller1@@"
 - barclamp: database
-  # Proposal name defaults to 'default'.
-  # Default attributes are good enough, so we just need to assign
-  # nodes to roles:
   deployment:
     elements:
       database-server:
