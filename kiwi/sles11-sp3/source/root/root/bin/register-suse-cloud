@@ -5,9 +5,19 @@ set -e
 admin_ip="${1:-192.168.124.10}"
 
 export PATH="$PATH:/sbin:/usr/sbin/"
+
+zypper lr -e - | sed -n '/^name=/ {s///; p}' | \
+    xargs -r zypper rr
+
 zypper ar http://${admin_ip}:8091/suse-11.3/install sles11-sp3
-until [ -f crowbar_register ]; do
+
+while true; do
     wget http://${admin_ip}:8091/suse-11.3/crowbar_register
+    if [ -f crowbar_register ]; then
+        break
+    fi
+    rcnetwork restart
+    sleep 3
 done
 chmod a+x crowbar_register
 ./crowbar_register --force --interface eth0 --gpg-auto-import-keys --no-gpg-checks
