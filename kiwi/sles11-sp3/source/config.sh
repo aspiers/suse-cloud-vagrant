@@ -63,6 +63,14 @@ baseUpdateSysConfig /etc/sysconfig/network/config NETWORKMANAGER no
 baseUpdateSysConfig /etc/sysconfig/SuSEfirewall2 FW_SERVICES_EXT_TCP 22\ 80\ 443
 baseUpdateSysConfig /etc/sysconfig/console CONSOLE_FONT lat9w-16.psfu
 
+if ! [ -e /studio/build-custom ]; then
+    cat <<'EOF' >&2
+/studio/build-custom was missing!  Did you mistakenly run
+'osc service dr' instead of 'make'?
+EOF
+    exit 1
+fi
+
 chown root:root /studio/build-custom
 chmod 755 /studio/build-custom
 # run custom build_script after build
