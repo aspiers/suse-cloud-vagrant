@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 NODE"
+    exit 1
+fi
+
+node=$1
+
+knife -y node delete $node
+knife -y role delete $(echo "crowbar-$node" | sed "s/\./_/g")
+knife -y client delete $node
