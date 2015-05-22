@@ -1,0 +1,22 @@
+* setup
+*** flash USB keys with SLES appliance
+*** boot fresh appliance (with NAT bridge?)
+*** *FIND OUT WHICH SIDE OF RACK WE WILL GET*
+*** copy appropriate network2?.json from /tmp
+*** screen -L go
+*** downgrade rabbitmq
+*** shutdown admin node
+*** check libvirt bridge onto physical network (virbr3) is active
+*** if necessary, switch NIC from NAT to bridged
+***** and boot up again
+*** rcnetwork stop
+*** test DHCP via other laptop
+* competition
+*** boot nodes from USB
+*** monitor DHCP leases
+*** ssh in and run register-suse-cloud
+*** set aliases, including admin node ("admin")
+*** run prep
+* testing
+*** nova boot --image cirros --flavor m1.micro.avx  cirros-avx
+*** nova boot --image cirros --flavor m1.micro.avx2 cirros-avx2
